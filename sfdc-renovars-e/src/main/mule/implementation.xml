@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:document-p-api="http://www.mulesoft.org/schema/mule/document-p-api" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:product-p-api="http://www.mulesoft.org/schema/mule/product-p-api"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/product-p-api http://www.mulesoft.org/schema/mule/product-p-api/current/mule-product-p-api.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schema/mule/document-p-api/current/mule-document-p-api.xsd">
+	<flow name="initVars" doc:id="29602897-f678-4fba-9a1f-454f7963e3ec" >
+		<set-variable value="#[now()]" doc:name="Set Variable" doc:id="a8e5830a-f3c6-4f96-9d13-969feb41ca91" variableName="timestamp" />
+		<set-variable value="#[uuid()]" doc:name="Set Variable" doc:id="cdc59811-e4c1-4531-b109-369a52680010" variableName="transactionId" />
+	</flow>
+	<flow name="confirmAccountQuote" doc:id="2c215ec6-947b-412f-b4f5-56e00055f346" >
+		<flow-ref doc:name="Flow Reference" doc:id="779a4963-4922-4e05-a88d-c883d7cb01a3" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="b0067e19-0e89-49ac-90d5-b0a73f006801" message="#[vars.timestamp ++ vars.transactionId]"/>
+		<document-p-api:update-confirm-account-quotes doc:name="Update confirm account quotes" doc:id="35c5f233-c683-45e2-9dca-ed84c9245646" config-ref="Document_p_api_Config" f-name="confirmAccountQuote" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-confirm-account-quotes-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	account: payload.account,
+	quote: payload.quote,
+	client: payload.client
+}]]]></document-p-api:update-confirm-account-quotes-request-data>
+		</document-p-api:update-confirm-account-quotes>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="5ea63162-9907-43ab-9f05-9deaf09ffa84" >
+				<logger level="INFO" doc:name="Logger" doc:id="177e71d6-6a5c-4ff3-90d9-9d5e4e034abf" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] confirmAccountQuote-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="Sellers" doc:id="0f1f225c-601c-4ca9-988b-ce0da31626a1" >
+		<flow-ref doc:name="Flow Reference" doc:id="838b3aee-beea-46bf-b8bf-449f7661d95b" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="8a4880aa-050a-4fc2-9fe7-fa55c480b601" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-sellers doc:name="Update sellers" doc:id="0d4656f4-1aef-4ee9-bc4d-d3f6fa8c397e" config-ref="Document_p_api_Config" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}" f-name="sellers">
+			<document-p-api:update-sellers-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	seller: payload
+}]]]></document-p-api:update-sellers-request-data>
+		</document-p-api:update-sellers>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0f03bfd5-66c9-4a8c-9f77-3c989305d9d0" >
+				<logger level="INFO" doc:name="Logger" doc:id="cc09b8de-42da-456e-be92-f61045f80b98" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] seller-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="Appointment" doc:id="06c5a94f-aca7-4add-bd1d-e2222b4edfb4" >
+		<flow-ref doc:name="Flow Reference" doc:id="0b30b349-7fa7-490e-8874-fb76d6e98a17" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="797e1932-9fdf-44aa-a266-8d0a61a1a2af" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-appointments doc:name="Update appointments" doc:id="b9c48f19-be0b-4132-acff-4e867a28f543" config-ref="Document_p_api_Config" f-name="appointment" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-appointments-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	appointment: payload
+}]]]></document-p-api:update-appointments-request-data>
+		</document-p-api:update-appointments>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="01d1084c-0a05-4b65-9ad5-271e4b55499d" >
+				<logger level="INFO" doc:name="Logger" doc:id="566df1e4-7caa-4fc8-87ea-dfdc7ab7e16a" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: appointment] appointment-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="QuoteToFR" doc:id="c2f05458-b248-46fa-b6ce-84306ab5f983" >
+		<flow-ref doc:name="Flow Reference" doc:id="5402df1e-ec53-4371-8dbd-f01ada7a3ab3" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="37fb9289-3fd6-4917-8fff-b986a853ed12" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-quote-to-f-rs doc:name="Update quote to f rs" doc:id="681c85a6-42e3-4747-b949-2632f070b94a" config-ref="Document_p_api_Config" f-name="quoteToFR" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-quote-to-f-rs-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	quote: payload
+}]]]></document-p-api:update-quote-to-f-rs-request-data>
+		</document-p-api:update-quote-to-f-rs>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0473a776-4f76-42cc-b3b7-66bff0e3ba14" >
+				<logger level="INFO" doc:name="Logger" doc:id="ef7c5c3c-d39a-4e54-8dff-beff2ecd01d3" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: quoteToFR] quotetofr-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="Contracts" doc:id="d16ad283-cad2-4edb-8b13-b43ad320ffc5" >
+		<flow-ref doc:name="Flow Reference" doc:id="31960dc3-51f0-4168-aec7-6ec973d92646" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="d17e79bf-5188-4b75-a988-9443d7a97733" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-contracts doc:name="Update contracts" doc:id="8fe902e0-450c-4780-aefc-a3c840348981" config-ref="Document_p_api_Config" f-name="contracts" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-contracts-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	contracts: payload
+}]]]></document-p-api:update-contracts-request-data>
+		</document-p-api:update-contracts>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1520d4cc-5a61-42b9-92f1-26189e9fa803" >
+				<logger level="INFO" doc:name="Logger" doc:id="55c74850-0a5e-4422-99d5-c2854470b406" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] seller-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>

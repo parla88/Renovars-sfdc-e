@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:document-p-api="http://www.mulesoft.org/schema/mule/document-p-api" xmlns:customer-p-api="http://www.mulesoft.org/schema/mule/customer-p-api"
+	xmlns:product-p-api="http://www.mulesoft.org/schema/mule/product-p-api"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/product-p-api http://www.mulesoft.org/schema/mule/product-p-api/current/mule-product-p-api.xsd
+http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schema/mule/customer-p-api/current/mule-customer-p-api.xsd
+http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schema/mule/document-p-api/current/mule-document-p-api.xsd">
+	<global-property doc:name="Global Property" doc:id="d427efe6-4658-4a27-83b2-4199f5187459" name="mule.env" value="dev" />
+	<global-property doc:name="Global Property" doc:id="208fe042-311b-438a-8e59-dd63dfffc2ef" name="https.private.port" value="8081" />
+	<configuration-properties doc:name="Configuration properties" doc:id="e111727c-326e-416e-88cf-1eb5c8b3fdd4" file="${mule.env}-config.yaml" />
+	<api-gateway:autodiscovery apiId="${application.autodiscovery}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="2c43a107-7253-469f-8bc9-8a29d65bc45f" flowRef="sfdc-renovars-e-api-main" />
+	<global-property doc:name="Global Property" doc:id="acd724da-c1cc-4a5c-b438-3b0bea88224c" name="secure.key" value="*** REMOVED ***" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="bc839ca7-ca14-4d47-b4c0-23ce8cde5375" file="${mule.env}-config.yaml" key="${secure.key}" />
+	<document-p-api:config name="Document_p_api_Config" doc:name="Document-p-api Config" doc:id="b5bc1cb1-8d0a-477f-8b37-a0ab2d3ce551" property_host="${document.process.host}" property_port="${document.process.port}" property_protocol="${document.process.protocol}" property_responseTimeout="120000" property_basePath="${document.process.basepath}"/>
+	
+
+
+</mule>
