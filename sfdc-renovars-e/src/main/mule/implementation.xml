@@ -129,7 +129,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	contracts: payload
+	request: payload
 }]]]></document-p-api:create-agent-request-data>
 		</document-p-api:create-agent>
 		<error-handler >
@@ -147,7 +147,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	contracts: payload
+	request: payload
 }]]]></document-p-api:delete-properties-request-data>
 		</document-p-api:delete-properties>
 		<error-handler >
@@ -165,7 +165,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	contracts: payload
+	request: payload
 }]]]></document-p-api:delete-agents-request-data>
 		</document-p-api:delete-agents>
 		<error-handler >
