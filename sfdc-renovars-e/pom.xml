@@ -56,13 +56,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
-			<artifactId>sfdc-renovars-e-api</artifactId>
-			<version>1.0.19</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
 			<version>1.8.3</version>
@@ -73,6 +66,13 @@
 			<artifactId>mule-plugin-document-p-api</artifactId>
 			<version>1.0.18</version>
 			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
+			<artifactId>sfdc-renovars-e-api</artifactId>
+			<version>1.0.20</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 

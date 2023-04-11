@@ -3,7 +3,7 @@
     <http:listener-config name="sfdc-renovars-e-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" readTimeout="120000" />
     </http:listener-config>
-    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.19:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.20:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="sfdc-renovars-e-api-main">
         <http:listener config-ref="sfdc-renovars-e-api-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -112,29 +112,18 @@ output application/json
         <flow-ref doc:name="Flow Reference" doc:id="a1c06bcb-86f6-4e68-9a19-7f531cab3a25" name="Contracts" />
     </flow>
     <flow name="put:\campaigns:application\json:sfdc-renovars-e-api-config">
-        <ee:transform>
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  transactionId: "AA22BBCC",
-  timestamp: "2012-04-23T18:25:43.511Z",
-  success: true
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+        <flow-ref doc:name="Flow Reference" doc:id="d7a6c1f5-e459-4a6b-a483-934a4eac4ebe" name="Campaigns" />
     </flow>
     <flow name="delete:\ads\facileimmobiliare\agent:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="5b17beee-df29-4afb-b2d5-9d8f96afefcd" name="FacileImmobiliareDeleteAgent"/>
+        <flow-ref doc:name="Flow Reference" doc:id="5b17beee-df29-4afb-b2d5-9d8f96afefcd" name="FacileImmobiliareDeleteAgent" />
     </flow>
     <flow name="delete:\ads\facileimmobiliare\property:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="a5aaabd4-ea1b-4401-8cf5-babb2fb85fb9" name="FacileImmobiliareDeleteProperty"/>
+        <flow-ref doc:name="Flow Reference" doc:id="a5aaabd4-ea1b-4401-8cf5-babb2fb85fb9" name="FacileImmobiliareDeleteProperty" />
     </flow>
     <flow name="post:\ads\facileimmobiliare\agent:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="f886374f-186a-46ba-a2bc-7f917bc02ad6" name="FacileImmobiliareCreateAgent"/>
+        <flow-ref doc:name="Flow Reference" doc:id="f886374f-186a-46ba-a2bc-7f917bc02ad6" name="FacileImmobiliareCreateAgent" />
     </flow>
     <flow name="post:\ads\facileimmobiliare\property:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="19bea2d6-b060-450b-abb7-9f2083307715" name="FacileImmobiliareCreateProperty"/>
+        <flow-ref doc:name="Flow Reference" doc:id="19bea2d6-b060-450b-abb7-9f2083307715" name="FacileImmobiliareCreateProperty" />
     </flow>
 </mule>

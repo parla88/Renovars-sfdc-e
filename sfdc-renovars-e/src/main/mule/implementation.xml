@@ -93,7 +93,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	contracts: payload
+	contracts: payload.request.contracts
 }]]]></document-p-api:update-contracts-request-data>
 		</document-p-api:update-contracts>
 		<error-handler >
@@ -171,6 +171,24 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 		<error-handler >
 			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="941f7c9d-d260-4b89-b81d-3b3092a6cf97" >
 				<logger level="INFO" doc:name="Logger" doc:id="50271a5d-966a-4baa-b149-9e5548dd26cf" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: DeleteAgentFacileImmobiliare] FacileImmobiliareDeleteAgent error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="Campaigns" doc:id="1e912b9d-a75c-42f7-8f79-1c1fb5a0459b" >
+		<flow-ref doc:name="Flow Reference" doc:id="96936e62-b443-4089-846c-adf5f445d31a" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="450aa227-4616-4897-85f0-ca8188c1a203" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-campaigns doc:name="Update campaigns" doc:id="988ff7f0-931f-455e-8edb-57413451adf9" config-ref="Document_p_api_Config" f-name="campaigns" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-campaigns-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	campaigns: payload.request.campaigns
+}]]]></document-p-api:update-campaigns-request-data>
+		</document-p-api:update-campaigns>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="b04bee1c-6205-4824-8ba6-fa14b83f9afa" >
+				<logger level="INFO" doc:name="Logger" doc:id="9a7302cb-9d52-4eb5-9451-c8af9a2d0a16" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] seller-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
 			</on-error-propagate>
 		</error-handler>
 	</flow>
