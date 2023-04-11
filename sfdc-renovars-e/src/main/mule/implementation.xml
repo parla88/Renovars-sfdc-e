@@ -93,7 +93,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	contracts: payload.request.contracts
+	contracts: payload.request.contracts 
 }]]]></document-p-api:update-contracts-request-data>
 		</document-p-api:update-contracts>
 		<error-handler >
@@ -183,7 +183,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	campaigns: payload.request.campaigns
+	campaigns: payload.request.campaigns 
 }]]]></document-p-api:update-campaigns-request-data>
 		</document-p-api:update-campaigns>
 		<error-handler >
