@@ -63,16 +63,16 @@
 		</dependency>
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
-			<artifactId>mule-plugin-document-p-api</artifactId>
-			<version>1.0.18</version>
-			<classifier>mule-plugin</classifier>
+			<artifactId>sfdc-renovars-e-api</artifactId>
+			<version>1.0.24</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
-			<artifactId>sfdc-renovars-e-api</artifactId>
-			<version>1.0.22</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
+			<artifactId>mule-plugin-document-p-api</artifactId>
+			<version>1.0.21</version>
+			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 

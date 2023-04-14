@@ -123,15 +123,15 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 	<flow name="FacileImmobiliareCreateAgent" doc:id="b693a745-c0b3-4163-b24b-6fc5d8f7ee57" >
 		<flow-ref doc:name="Flow Reference" doc:id="6cb55d19-d03e-4be5-8def-7a4a887ed0a5" name="initVars"/>
 		<logger level="INFO" doc:name="Logger" doc:id="3c2de691-7215-4af5-82df-d53d532a35fa" message="#[vars.timestamp ++ vars.transactionId]" />
-		<document-p-api:create-agent doc:name="Create agent" doc:id="49edd178-d349-47e4-9108-1a385011d154" config-ref="Document_p_api_Config" f-name="#['CreateAgentFacileImmobiliare']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
-			<document-p-api:create-agent-request-data><![CDATA[#[output application/json
+		<document-p-api:create-agent_1 doc:name="Create agent _ 1" doc:id="301fc9c8-84c6-4f32-b3c7-a01a6d05a8c2" config-ref="Document_p_api_Config" f-name="#['CreateAgentFacileImmobiliare']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:create-agent_1-request-data ><![CDATA[#[output application/json
 ---
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
 	request: payload
-}]]]></document-p-api:create-agent-request-data>
-		</document-p-api:create-agent>
+}]]]></document-p-api:create-agent_1-request-data>
+		</document-p-api:create-agent_1>
 		<error-handler >
 			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2774b6b8-d2d4-4592-b6db-270073d8a7be" >
 				<logger level="INFO" doc:name="Logger" doc:id="b010e43f-32f4-4645-8f5d-0922463afbbb" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: CreateAgentFacileImmobiliare] FacileImmobiliareCreateAgent error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
@@ -159,15 +159,15 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 	<flow name="FacileImmobiliareDeleteAgent" doc:id="dcbb0769-f872-4447-b823-65c5bd6d29d9" >
 		<flow-ref doc:name="Flow Reference" doc:id="c45a4c0a-206b-402e-a530-02889a9bb3d4" name="initVars"/>
 		<logger level="INFO" doc:name="Logger" doc:id="a0763e5b-10de-4f1d-ac74-0d8c216f0deb" message="#[vars.timestamp ++ vars.transactionId]" />
-		<document-p-api:delete-agents doc:name="Delete agents" doc:id="e0a5c417-4524-4443-9c22-849468071e82" config-ref="Document_p_api_Config" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}" f-name="#['DeleteAgentFacileImmobiliare']">
-			<document-p-api:delete-agents-request-data ><![CDATA[#[output application/json
+		<document-p-api:delete-agents_1 doc:name="Delete agents _ 1" doc:id="9553f89f-b2f6-49ab-baaf-e78e01891684" config-ref="Document_p_api_Config" f-name="#['DeleteAgentsFacileImmobiliare']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:delete-agents_1-request-data ><![CDATA[#[output application/json
 ---
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
 	request: payload
-}]]]></document-p-api:delete-agents-request-data>
-		</document-p-api:delete-agents>
+}]]]></document-p-api:delete-agents_1-request-data>
+		</document-p-api:delete-agents_1>
 		<error-handler >
 			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="941f7c9d-d260-4b89-b81d-3b3092a6cf97" >
 				<logger level="INFO" doc:name="Logger" doc:id="50271a5d-966a-4baa-b149-9e5548dd26cf" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: DeleteAgentFacileImmobiliare] FacileImmobiliareDeleteAgent error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
@@ -191,5 +191,70 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 				<logger level="INFO" doc:name="Logger" doc:id="9a7302cb-9d52-4eb5-9451-c8af9a2d0a16" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] seller-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
 			</on-error-propagate>
 		</error-handler>
+	</flow>
+	<flow name="WikicasaDeleteAgent" doc:id="781b4f46-57ec-4b27-b319-2dcbda41f326" >
+		<flow-ref doc:name="Flow Reference" doc:id="888eab26-025e-4364-818c-b01ce0c76d00" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="42b45670-293a-43cb-955d-aaf5f5e3798d" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:delete-agents_2 doc:name="Delete agents _ 2" doc:id="6c66d962-c50f-4416-ad73-7c2e06c727b3" config-ref="Document_p_api_Config" f-name="#['deleteAgentsWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:delete-agents_2-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:delete-agents_2-request-data>
+		</document-p-api:delete-agents_2>
+	</flow>
+	<flow name="WikicasapostAgent" doc:id="95279f3f-b871-4491-80d7-dd30f6fa96ef" >
+		<flow-ref doc:name="Flow Reference" doc:id="c92a77b0-beb5-434d-8d81-be197b61dd15" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="12c99bea-59b8-47e8-8b65-c3dd70620c1f" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:create-agent_2 doc:name="Create agent _ 2" doc:id="4597e3fc-c45f-431d-813b-f3da344a6a5e" config-ref="Document_p_api_Config" f-name="#['postAgentsWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:create-agent_2-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:create-agent_2-request-data>
+		</document-p-api:create-agent_2>
+	</flow>
+	<flow name="WikicasaputAgent" doc:id="4f778e20-7f30-49d4-980e-f195054632f7" >
+		<flow-ref doc:name="Flow Reference" doc:id="d284ad3d-5270-4d6a-b375-d4df52051e71" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="5130ab52-8e74-4c6b-9ab0-0d970435cb76" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-agents doc:name="Update agents" doc:id="915d1050-fb6c-403c-a291-0970d5727221" config-ref="Document_p_api_Config" f-name="#['putAgentsWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-agents-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:update-agents-request-data>
+		</document-p-api:update-agents>
+	</flow>
+	<flow name="WikicasaputAgencie" doc:id="e4873b03-fc6a-464e-9ca9-f4f7246cfdb8" >
+		<flow-ref doc:name="Flow Reference" doc:id="b62ee02d-b5cd-4177-bd58-920d3d222539" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="238c9cf8-0b71-4465-8cd2-5c7eff98fbd7" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:update-agencies doc:name="Update agencies" doc:id="72acdd5a-3a3a-433b-b9f0-00592704fd43" config-ref="Document_p_api_Config" f-name="#['putAgencieWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:update-agencies-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:update-agencies-request-data>
+		</document-p-api:update-agencies>
+	</flow>
+	<flow name="WikicasapostAgencie" doc:id="e64698da-65c1-4ffe-90ce-a3376118de00" >
+		<flow-ref doc:name="Flow Reference" doc:id="76efa784-f410-4249-a3b7-b6f94fd098e7" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="9ce46909-69c6-4519-8933-8c84ce18936a" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:create-agencie doc:name="Create agencie" doc:id="e6e28895-567f-4f6c-bade-85f54e381719" config-ref="Document_p_api_Config" f-name="#['postAgencieWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:create-agencie-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:create-agencie-request-data>
+		</document-p-api:create-agencie>
 	</flow>
 </mule>
