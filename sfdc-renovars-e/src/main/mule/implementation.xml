@@ -147,7 +147,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	request: payload.request.properties
+	request: payload.request.deleteArray
 }]]]></document-p-api:delete-properties-request-data>
 		</document-p-api:delete-properties>
 		<error-handler >
@@ -292,7 +292,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 {
 	transactionId: vars.transactionId,
 	timestamp: vars.timestamp as String,
-	request: payload.request.properties
+	request: payload.request.deleteArray
 }]]]></document-p-api:delete-property-wikicasa-request-data>
 		</document-p-api:delete-property-wikicasa>
 	</flow>
