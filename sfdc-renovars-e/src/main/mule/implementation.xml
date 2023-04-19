@@ -257,4 +257,43 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 }]]]></document-p-api:create-agencie-request-data>
 		</document-p-api:create-agencie>
 	</flow>
+	<flow name="WikicasapostProperty" doc:id="24aa7319-fefd-4f18-a7b4-9d029ae40e74" >
+		<flow-ref doc:name="Flow Reference" doc:id="b0be4dc3-d46e-416e-9b1b-c5c707f34410" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="6fbac815-027a-4767-9a33-3aa283d2cd57" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:post-property-wikicasa doc:name="post Property Wikicasa" doc:id="972b0c18-d716-4e1b-a857-a207526da2d4" config-ref="Document_p_api_Config" f-name="#['postPropertyWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-property-wikicasa-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload.request.properties
+}]]]></document-p-api:post-property-wikicasa-request-data>
+		</document-p-api:post-property-wikicasa>
+	</flow>
+	<flow name="WikicasaputProperty" doc:id="a0dd9317-f516-4b9e-beb9-64ecd641ae33" >
+		<flow-ref doc:name="Flow Reference" doc:id="9162f3fd-47ed-40d8-b6b3-6a4652fb2ba4" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="70fc9934-dfaa-4ba5-b687-7174726dd246" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:put-property-wikicasa doc:name="put Property Wikicasa" doc:id="e2696d7a-fb50-4395-ba93-3822f1b37e57" config-ref="Document_p_api_Config" f-name="#['putPropertyWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:put-property-wikicasa-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload.request.properties
+}]]]></document-p-api:put-property-wikicasa-request-data>
+		</document-p-api:put-property-wikicasa>
+	</flow>
+	<flow name="WikicasadeleteProperty" doc:id="2ae589e8-3f65-443b-a877-353e5e4cf2a8" >
+		<flow-ref doc:name="Flow Reference" doc:id="9673d112-6715-4bca-9d6c-c9807e8804c9" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="2f53f33c-1e1c-4d48-b435-0dadd62f2dd9" message="#[vars.timestamp ++ vars.transactionId]" />
+		<document-p-api:delete-property-wikicasa doc:name="delete Property Wikicasa" doc:id="34312e50-7183-40e6-9bd2-9b132aca0a49" config-ref="Document_p_api_Config" f-name="#['deletePropertyWikiCasa']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:delete-property-wikicasa-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload.request.properties
+}]]]></document-p-api:delete-property-wikicasa-request-data>
+		</document-p-api:delete-property-wikicasa>
+	</flow>
 </mule>

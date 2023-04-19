@@ -64,13 +64,13 @@
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
 			<artifactId>mule-plugin-document-p-api</artifactId>
-			<version>1.0.21</version>
+			<version>1.0.23</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
 			<artifactId>sfdc-renovars-e-api</artifactId>
-			<version>1.0.26</version>
+			<version>1.0.27</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
