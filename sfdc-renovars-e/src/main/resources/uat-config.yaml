@@ -6,5 +6,13 @@ document:
     basepath: /api/
     host: uat-document-p-v1-6jr89g.nrx3t6.usa-e2.cloudhub.io
     clientid: '![dqD5voAy/pl7uKJbNATd5XD2c2OIqOLaouKs8Wzd3C5/VLziRIhkylxQtfo2JkLG]'
+customer:
+  process:
+    clientsecret: '![uLRkvlHrJKDQbGAoCHiQZuXN0DTTpDJ2o/of0Im5bHNxnmxWvNGPkEK/+C5wVWk9]'
+    clientid: '![dqD5voAy/pl7uKJbNATd5XD2c2OIqOLaouKs8Wzd3C5/VLziRIhkylxQtfo2JkLG]'
+    host: uat-customer-p-v1-6jr89g.nrx3t6.usa-e2.cloudhub.io
+    protocol: HTTPS
+    port: '443'
+    basepath: /api/
 application:
   autodiscovery: '18493735'

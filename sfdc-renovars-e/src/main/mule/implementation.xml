@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:document-p-api="http://www.mulesoft.org/schema/mule/document-p-api" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns:product-p-api="http://www.mulesoft.org/schema/mule/product-p-api"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:customer-p-api="http://www.mulesoft.org/schema/mule/customer-p-api" xmlns:document-p-api="http://www.mulesoft.org/schema/mule/document-p-api"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:product-p-api="http://www.mulesoft.org/schema/mule/product-p-api" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/product-p-api http://www.mulesoft.org/schema/mule/product-p-api/current/mule-product-p-api.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schema/mule/document-p-api/current/mule-document-p-api.xsd">
+http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schema/mule/document-p-api/current/mule-document-p-api.xsd
+http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schema/mule/customer-p-api/current/mule-customer-p-api.xsd">
 	<flow name="initVars" doc:id="29602897-f678-4fba-9a1f-454f7963e3ec" >
 		<set-variable value="#[now()]" doc:name="Set Variable" doc:id="a8e5830a-f3c6-4f96-9d13-969feb41ca91" variableName="timestamp" />
 		<set-variable value="#[uuid()]" doc:name="Set Variable" doc:id="cdc59811-e4c1-4531-b109-369a52680010" variableName="transactionId" />
@@ -295,5 +296,10 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 	request: payload.request.deleteArray
 }]]]></document-p-api:delete-property-wikicasa-request-data>
 		</document-p-api:delete-property-wikicasa>
+	</flow>
+	<flow name="getUsers" doc:id="7bbc5e22-cd84-4b75-841e-5687eb6f8c3c" >
+		<flow-ref doc:name="Flow Reference" doc:id="78fea889-c02b-46c5-bbf9-84d5618143e6" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="102b8cfc-c6ce-4bfe-a115-9985385257f2" message='#[vars.timestamp ++ vars.transactionId ++ " getUser in experience"]' />
+		<customer-p-api:get-users doc:name="Get users" doc:id="f3036981-2029-499b-b3bf-2359d7041584" config-ref="Customer_p_api_Config" f-name="#['getUser']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
 	</flow>
 </mule>

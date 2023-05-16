@@ -6,5 +6,13 @@ document:
     basepath: /api/
     host: document-renovars-p-api-v1-hun63j.nrx3t6.usa-e2.cloudhub.io
     clientid: '![dqD5voAy/pl7uKJbNATd5XD2c2OIqOLaouKs8Wzd3C5/VLziRIhkylxQtfo2JkLG]'
+customer:
+  process:
+    clientsecret: '![uLRkvlHrJKDQbGAoCHiQZuXN0DTTpDJ2o/of0Im5bHNxnmxWvNGPkEK/+C5wVWk9]'
+    clientid: '![dqD5voAy/pl7uKJbNATd5XD2c2OIqOLaouKs8Wzd3C5/VLziRIhkylxQtfo2JkLG]'
+    host: customer-renovars-p-api-v1-hun63j.nrx3t6.usa-e2.cloudhub.io
+    protocol: HTTPS
+    port: '443'
+    basepath: /api/
 application:
   autodiscovery: '18510771'

@@ -16,6 +16,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 	<global-property doc:name="Global Property" doc:id="acd724da-c1cc-4a5c-b438-3b0bea88224c" name="secure.key" value="*** REMOVED ***" />
 	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="bc839ca7-ca14-4d47-b4c0-23ce8cde5375" file="${mule.env}-config.yaml" key="${secure.key}" />
 	<document-p-api:config name="Document_p_api_Config" doc:name="Document-p-api Config" doc:id="b5bc1cb1-8d0a-477f-8b37-a0ab2d3ce551" property_host="${document.process.host}" property_port="${document.process.port}" property_protocol="${document.process.protocol}" property_responseTimeout="120000" property_basePath="${document.process.basepath}"/>
+	<customer-p-api:config name="Customer_p_api_Config" doc:name="Customer-p-api Config" doc:id="9e3ef514-774d-4331-b159-dd56b31c00e1" property_host="${customer.process.host}" property_port="${customer.process.port}" property_protocol="${customer.process.protocol}" property_basePath="${customer.process.basepath}" property_responseTimeout="120000" />
 	
 
 

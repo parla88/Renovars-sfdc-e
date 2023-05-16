@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.4.0-20221212</app.runtime>
-		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
+		<mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
 	</properties>
 
 	<build>
@@ -69,8 +69,14 @@
 		</dependency>
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
+			<artifactId>mule-plugin-customer-p-api</artifactId>
+			<version>1.0.8</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
 			<artifactId>sfdc-renovars-e-api</artifactId>
-			<version>1.0.28</version>
+			<version>1.0.30</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
