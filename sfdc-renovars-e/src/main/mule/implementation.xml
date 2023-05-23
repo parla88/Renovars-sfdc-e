@@ -302,4 +302,23 @@ http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schem
 		<logger level="INFO" doc:name="Logger" doc:id="102b8cfc-c6ce-4bfe-a115-9985385257f2" message='#[vars.timestamp ++ vars.transactionId ++ " getUser in experience"]' />
 		<customer-p-api:get-users doc:name="Get users" doc:id="f3036981-2029-499b-b3bf-2359d7041584" config-ref="Customer_p_api_Config" f-name="#['getUser']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
 	</flow>
+	<flow name="GetEvent" doc:id="291bd512-86d7-433a-af86-05fcf84b6b2a" >
+		<flow-ref doc:name="Flow Reference" doc:id="644ffec6-c81d-48b5-b8fb-927f78f3bf64" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="bb7af6f0-b999-45df-878a-eeab29779605" message='#[vars.timestamp ++ vars.transactionId ++ " getEvent in experience"]' />
+		<customer-p-api:get-events-by-id doc:name="Get events by id" doc:id="d1743a83-8d8f-40eb-bb00-f4ba05f2e33d" config-ref="Customer_p_api_Config" startdatetime="#[attributes.queryParams.startdatetime]" enddatetime="#[attributes.queryParams.enddatetime]" id="#[attributes.uriParams.'id']" f-name="#['getEvent']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
+	</flow>
+	<flow name="postEvent" doc:id="4d400566-69c9-4a25-bcd9-3ee1e02111a5" >
+		<flow-ref doc:name="Flow Reference" doc:id="465917fd-1a48-45d7-8822-439d800e5392" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="4ef117d4-3991-4a8f-9bde-ea65f1a8e81f" message='#[vars.timestamp ++ vars.transactionId ++ " postEvent in experience"]' />
+		<customer-p-api:create-event-by-id doc:name="Create event by id" doc:id="eb817249-c0c3-45db-adad-25a7e58fe9ff" config-ref="Customer_p_api_Config" id="#[attributes.uriParams.'id']" f-name="#['postEvent']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:create-event-by-id-request-data ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></customer-p-api:create-event-by-id-request-data>
+		</customer-p-api:create-event-by-id>
+	</flow>
 </mule>

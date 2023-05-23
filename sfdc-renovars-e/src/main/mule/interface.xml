@@ -3,7 +3,7 @@
     <http:listener-config name="sfdc-renovars-e-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" readTimeout="120000" />
     </http:listener-config>
-    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.30:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.35:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="sfdc-renovars-e-api-main">
         <http:listener config-ref="sfdc-renovars-e-api-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -151,6 +151,12 @@ output application/json
         <flow-ref doc:name="Flow Reference" doc:id="4a80adbc-5380-4004-929f-8987cc053048" name="WikicasapostProperty" />
     </flow>
     <flow name="get:\microsoftgraph\users:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="8604165e-8799-46f0-a595-536d9b55f077" name="getUsers"/>
+        <flow-ref doc:name="Flow Reference" doc:id="8604165e-8799-46f0-a595-536d9b55f077" name="getUsers" />
+    </flow>
+    <flow name="get:\microsoftgraph\(id)\events:sfdc-renovars-e-api-config">
+        <flow-ref doc:name="Flow Reference" doc:id="b5f4eea9-550e-4015-bdb0-7661425b34de" name="GetEvent" />
+    </flow>
+    <flow name="post:\microsoftgraph\(id)\events:application\json:sfdc-renovars-e-api-config">
+		<flow-ref doc:name="Flow Reference" doc:id="0ccc7347-c3a4-4332-a2f1-21ab21512c1e" name="postEvent"/>
     </flow>
 </mule>
