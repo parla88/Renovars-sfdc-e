@@ -321,4 +321,44 @@ output application/json
 }]]]></customer-p-api:create-event-by-id-request-data>
 		</customer-p-api:create-event-by-id>
 	</flow>
+	<flow name="getPoi" doc:id="d0b7f258-02ff-486e-916d-4dfdf6b4a4a4" >
+		<flow-ref doc:name="Flow Reference" doc:id="3d19989d-6436-469c-a46f-b141b68689e0" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="65f2a498-1599-45e7-959c-c9a147467fa6" message='#[vars.timestamp ++ vars.transactionId ++ " getPoi in experience"]' />
+		<customer-p-api:get-pois doc:name="Get pois" doc:id="a159aaf9-2be3-41fa-b7ad-b91815cddd11" config-ref="Customer_p_api_Config" latitudine="#[attributes.queryParams.latitudine]" longitudine="#[attributes.queryParams.longitudine]" f-name="#['getPoi']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
+	</flow>
+	<flow name="getTipologia" doc:id="517a3335-64a5-498b-b7df-ce4d69dd909d" >
+		<flow-ref doc:name="Flow Reference" doc:id="25c272a6-a29c-4f53-a3c4-568244409e3c" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="ef876437-8a7a-4ea1-b5ff-95fe857cb42d" message='#[vars.timestamp ++ vars.transactionId ++ " getTipologie in experience"]' />
+		<customer-p-api:get-tipologies doc:name="Get tipologies" doc:id="6b92926b-6bff-4c03-9c96-bc084af1b1d8" config-ref="Customer_p_api_Config" latitudine="#[attributes.queryParams.latitudine]" longitudine="#[attributes.queryParams.longitudine]" f-name="#['getTipologia']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
+	</flow>
+	<flow name="postSmart" doc:id="88c776e5-7952-41ef-b73c-de1d4beddb4d" >
+		<flow-ref doc:name="Flow Reference" doc:id="d2ff1542-b5c3-4a71-8a16-4d635c4f455e" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="96fa5182-864b-4240-be6c-3b30dee8dbf2" message='#[vars.timestamp ++ vars.transactionId ++ " postSmart in experience"]' />
+		<customer-p-api:create-smart doc:name="Create smart" doc:id="911ed8be-e49c-40b6-b7fe-64c492c4f542" config-ref="Customer_p_api_Config" f-name="#['postSmart']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:create-smart-request-data ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+    "transactionId":  vars.transactionId,
+    "timestamp": vars.timestamp,
+    "request": payload.request
+
+}]]]></customer-p-api:create-smart-request-data>
+		</customer-p-api:create-smart>
+	</flow>
+	<flow name="postSmartAffitto" doc:id="e53613a9-8923-46b6-80ff-09552cdb1a16" >
+		<flow-ref doc:name="Flow Reference" doc:id="7c709feb-fb1c-46b4-9b52-9f44e115202b" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="dcc96c4a-64d3-4d9d-8f6f-9c5276373719" message='#[vars.timestamp ++ vars.transactionId ++ " postSmartAffitto in experience"]' />
+		<customer-p-api:create-affitto doc:name="Create affitto" doc:id="ae5c0200-f90f-4d16-b2fe-617590924419" config-ref="Customer_p_api_Config" f-name="#['postSmartAffitto']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:create-affitto-request-data ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+    "transactionId":  vars.transactionId,
+    "timestamp": vars.timestamp,
+    "request": payload.request
+
+}]]]></customer-p-api:create-affitto-request-data>
+		</customer-p-api:create-affitto>
+	</flow>
 </mule>
