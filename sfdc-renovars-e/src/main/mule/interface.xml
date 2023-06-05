@@ -172,11 +172,6 @@ output application/json
         <flow-ref doc:name="Flow Reference" doc:id="86e9aae9-df36-4c16-8aad-0717174d8666" name="postSmart" />
     </flow>
     <flow name="get:\ads\wikicasa\property\(id):sfdc-renovars-e-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <logger level="INFO" message="get:\ads\wikicasa\property\(id):sfdc-renovars-e-api-config" />
+		<flow-ref doc:name="Flow Reference" doc:id="14d3cb5a-9a9d-4026-bd75-2b09d10d2bb8" name="wikicasaGetPropertytoID"/>
     </flow>
 </mule>

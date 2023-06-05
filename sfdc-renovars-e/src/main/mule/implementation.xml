@@ -11,6 +11,15 @@ http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schem
 		<set-variable value="#[now()]" doc:name="Set Variable" doc:id="a8e5830a-f3c6-4f96-9d13-969feb41ca91" variableName="timestamp" />
 		<set-variable value="#[uuid()]" doc:name="Set Variable" doc:id="cdc59811-e4c1-4531-b109-369a52680010" variableName="transactionId" />
 	</flow>
+	<flow name="wikicasaGetPropertytoID" doc:id="0e2be0bc-7af4-4d5b-8ec8-98548304f8f2" >
+		<logger level="INFO" doc:name="Logger" doc:id="42a9be3c-ccc4-4052-9aca-7c76689033b3" message="getPropertytoId"/>
+		<document-p-api:get-property-to-id doc:name="Get property to Id" doc:id="a162f69b-535a-4b98-9f0b-20b1157cd659" config-ref="Document_p_api_Config" f-name="#['wikicasaGetProperty']" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}" id="#[attributes.uriParams.'id']"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="d933ddc1-8616-4784-a97b-7f67488a606e" >
+				<logger level="INFO" doc:name="Logger" doc:id="31878824-4d02-4d45-813d-acc9238f17ce" message="#[%dw 2.0&#10;output application/java&#10;---&#10;'[fName: seller] confirmAccountQuote-e error with message: [' ++ (error.detailedDescription default '') ++ ']']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
 	<flow name="confirmAccountQuote" doc:id="2c215ec6-947b-412f-b4f5-56e00055f346" >
 		<flow-ref doc:name="Flow Reference" doc:id="779a4963-4922-4e05-a88d-c883d7cb01a3" name="initVars" />
 		<logger level="INFO" doc:name="Logger" doc:id="b0067e19-0e89-49ac-90d5-b0a73f006801" message="#[vars.timestamp ++ vars.transactionId]"/>
