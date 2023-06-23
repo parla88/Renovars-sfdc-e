@@ -470,4 +470,17 @@ output application/json
 }]]]></customer-p-api:post-getusers-request-data>
 		</customer-p-api:post-getusers>
 	</flow>
+	<flow name="postGetUsersFimm" doc:id="022f898a-32f4-4a7a-8b15-15135d39457c" >
+		<flow-ref doc:name="Flow initVars" doc:id="ccb96374-a053-4f84-a59f-e115f2539b66" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="cadc4121-b9ef-49b9-8a49-82e8515b8aad" message='#[vars.timestamp ++ vars.transactionId ++ " postGetUsers in experience"]' />
+		<customer-p-api:post-getusersfimm doc:name="post getUsersFimm" doc:id="9d153ba7-0b0b-4ca4-8cec-49e1462bda4c" config-ref="Customer_p_api_Config" f-name="postGetUsers" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:post-getusersfimm-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></customer-p-api:post-getusersfimm-request-data>
+		</customer-p-api:post-getusersfimm>
+	</flow>
 </mule>

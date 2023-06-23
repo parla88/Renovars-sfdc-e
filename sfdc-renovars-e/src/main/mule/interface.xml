@@ -3,7 +3,7 @@
     <http:listener-config name="sfdc-renovars-e-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" readTimeout="120000" />
     </http:listener-config>
-    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.41:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.43:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="sfdc-renovars-e-api-main">
         <http:listener config-ref="sfdc-renovars-e-api-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -184,18 +184,21 @@ output application/json
         <flow-ref doc:name="Flow postSaleLeadInspection" doc:id="53950e1b-94af-40c4-9c9e-5afba254e16b" name="postSaleLeadInspection" />
     </flow>
     <flow name="post:\leadcross\appointment:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="68f00a60-16f4-4d24-89ed-7f5327111c2b" name="postAppointment"/>
+        <flow-ref doc:name="Flow Reference" doc:id="68f00a60-16f4-4d24-89ed-7f5327111c2b" name="postAppointment" />
     </flow>
     <flow name="post:\leadcross\file:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="5a4c9738-b747-4267-99db-dd99cfea9b84" name="postPlanimetry"/>
+        <flow-ref doc:name="Flow Reference" doc:id="5a4c9738-b747-4267-99db-dd99cfea9b84" name="postPlanimetry" />
     </flow>
     <flow name="post:\leadcross\getUsers:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="903fd4d9-c523-4aa4-909b-7dfdc8384eb4" name="postGetUsers"/>
+        <flow-ref doc:name="Flow Reference" doc:id="903fd4d9-c523-4aa4-909b-7dfdc8384eb4" name="postGetUsers" />
     </flow>
     <flow name="post:\leadcross\propertySlot:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="12fd563b-b7f1-4a1c-9f54-4d6fd2c6b600" name="postPropertySlot"/>
+        <flow-ref doc:name="Flow Reference" doc:id="12fd563b-b7f1-4a1c-9f54-4d6fd2c6b600" name="postPropertySlot" />
     </flow>
     <flow name="post:\leadcross\purchaseLeadVisit:application\json:sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="293a1af5-336c-4297-ac99-9d1eb11e5dd9" name="postPurchaseLeadVisit"/>
+        <flow-ref doc:name="Flow Reference" doc:id="293a1af5-336c-4297-ac99-9d1eb11e5dd9" name="postPurchaseLeadVisit" />
+    </flow>
+    <flow name="post:\leadcross\getUsersFimm:application\json:sfdc-renovars-e-api-config">
+		<flow-ref doc:name="Flow Reference" doc:id="f27c8dc4-bd71-4112-b9f9-d8e8de8469ed" name="postGetUsersFimm"/>
     </flow>
 </mule>
