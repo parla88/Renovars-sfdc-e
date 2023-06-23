@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:customer-p-api="http://www.mulesoft.org/schema/mule/customer-p-api" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd  http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schema/mule/customer-p-api/current/mule-customer-p-api.xsd">
     <http:listener-config name="sfdc-renovars-e-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" readTimeout="120000" />
     </http:listener-config>
-    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.37:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="sfdc-renovars-e-api-config" api="resource::9b82ee49-beb3-47b7-a619-0e05153193f5:sfdc-renovars-e-api:1.0.39:raml:zip:sfdc-renovars-e-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="sfdc-renovars-e-api-main">
         <http:listener config-ref="sfdc-renovars-e-api-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -172,6 +172,15 @@ output application/json
         <flow-ref doc:name="Flow Reference" doc:id="86e9aae9-df36-4c16-8aad-0717174d8666" name="postSmart" />
     </flow>
     <flow name="get:\ads\wikicasa\property\(id):sfdc-renovars-e-api-config">
-		<flow-ref doc:name="Flow Reference" doc:id="14d3cb5a-9a9d-4026-bd75-2b09d10d2bb8" name="wikicasaGetPropertytoID"/>
+        <flow-ref doc:name="Flow Reference" doc:id="14d3cb5a-9a9d-4026-bd75-2b09d10d2bb8" name="wikicasaGetPropertytoID" />
+    </flow>
+    <flow name="post:\microsoftgraph\eventsDelta:application\json:sfdc-renovars-e-api-config">
+        <flow-ref doc:name="Flow Reference" doc:id="5820444c-8f09-4b39-a7b6-57de0e591f57" name="postEventDelta" />
+    </flow>
+    <flow name="post:\microsoftgraph\eventsDeltaLink:application\json:sfdc-renovars-e-api-config">
+        <flow-ref doc:name="Flow Reference" doc:id="bb59365b-7c05-4fcd-8403-9862daa0ae29" name="postEventDeltaLink" />
+    </flow>
+    <flow name="post:\leadcross\saleLeadInspection:application\json:sfdc-renovars-e-api-config">
+		<flow-ref doc:name="Flow postSaleLeadInspection" doc:id="53950e1b-94af-40c4-9c9e-5afba254e16b" name="postSaleLeadInspection"/>
     </flow>
 </mule>

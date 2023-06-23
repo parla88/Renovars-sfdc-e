@@ -362,4 +362,47 @@ output application/json
 }]]]></customer-p-api:create-affitto-request-data>
 		</customer-p-api:create-affitto>
 	</flow>
+	<flow name="postEventDelta" doc:id="2085bcbe-db91-4d9b-8e0d-24eed1f55f86" >
+		<flow-ref doc:name="Flow Reference" doc:id="24350cc1-fe69-4b5c-8e3d-48b29f6bf8bc" name="initVars"/>
+		<logger level="INFO" doc:name="Logger" doc:id="0f6e9916-41b5-4ac2-852b-3bbe4255ae06" message='#[vars.timestamp ++ vars.transactionId ++ " postEventDelta in experience"]' />
+		<customer-p-api:create-events-deltum doc:name="Create events deltum" doc:id="61360e6e-7355-42c2-a58c-7050523b3e6e" config-ref="Customer_p_api_Config" startdatetime="#[attributes.queryParams.startdatetime]" enddatetime="#[attributes.queryParams.enddatetime]" f-name='#["postEventDelta"]' client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:create-events-deltum-request-data ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+    "transactionId":  vars.transactionId,
+    "timestamp": vars.timestamp,
+    "request": payload.request
+
+}]]]></customer-p-api:create-events-deltum-request-data>
+		</customer-p-api:create-events-deltum>
+	</flow>
+	<flow name="postEventDeltaLink" doc:id="645131bd-e1b5-4a84-9ed7-afae4c1398b7" >
+		<flow-ref doc:name="Flow Reference" doc:id="bea9abf8-f0af-45f6-8a1b-693914b0ca5d" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="4dc68264-8f84-4ece-a479-46f8bf075e05" message='#[vars.timestamp ++ vars.transactionId ++ " postEventDeltaLink in experience"]' />
+		<customer-p-api:create-events-delta-link doc:name="Create events delta link" doc:id="ce845a02-d81b-44e4-9c27-98203d194151" config-ref="Customer_p_api_Config" startdatetime="#[attributes.queryParams.startdatetime]" enddatetime="#[attributes.queryParams.enddatetime]" f-name='#["postEventDeltaLink"]' client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:create-events-delta-link-request-data ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+    "transactionId":  vars.transactionId,
+    "timestamp": vars.timestamp,
+    "request": payload.request
+
+}]]]></customer-p-api:create-events-delta-link-request-data>
+		</customer-p-api:create-events-delta-link>
+	</flow>
+	<flow name="postSaleLeadInspection" doc:id="823e3cf0-1c33-4d43-9573-40d11987de63" >
+		<flow-ref doc:name="Flow initVars" doc:id="fa1935cb-40f4-43fa-b2ff-f12dbe528ef4" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="d565b3de-faa4-4c6c-b4ae-d7b8b178c2e9" message='#[vars.timestamp ++ vars.transactionId ++ " postSaleLeadInspection in experience"]' />
+		<document-p-api:post-saleleadinspection doc:name="post saleLeadInspection" doc:id="69d08d8e-7198-47b1-aaf8-8cea2efba0b7" config-ref="Document_p_api_Config" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}" f-name='#["postSaleLeadInspection"]'>
+			<document-p-api:post-saleleadinspection-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:post-saleleadinspection-request-data>
+		</document-p-api:post-saleleadinspection>
+	</flow>
 </mule>
