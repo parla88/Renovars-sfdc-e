@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/document-p-api http://www.mulesoft.org/schem
 	<global-property doc:name="Global Property" doc:id="208fe042-311b-438a-8e59-dd63dfffc2ef" name="https.private.port" value="8081" />
 	<configuration-properties doc:name="Configuration properties" doc:id="e111727c-326e-416e-88cf-1eb5c8b3fdd4" file="${mule.env}-config.yaml" />
 	<api-gateway:autodiscovery apiId="${application.autodiscovery}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="2c43a107-7253-469f-8bc9-8a29d65bc45f" flowRef="sfdc-renovars-e-api-main" />
-	<global-property doc:name="Global Property" doc:id="acd724da-c1cc-4a5c-b438-3b0bea88224c" name="secure.key" value="*** REMOVED ***" />
+	<global-property doc:name="Global Property" doc:id="acd724da-c1cc-4a5c-b438-3b0bea88224c" name="secure.key" value="x!A%C*F-JaNdRgUk" />
 	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="bc839ca7-ca14-4d47-b4c0-23ce8cde5375" file="${mule.env}-config.yaml" key="${secure.key}" />
 	<document-p-api:config name="Document_p_api_Config" doc:name="Document-p-api Config" doc:id="b5bc1cb1-8d0a-477f-8b37-a0ab2d3ce551" property_host="${document.process.host}" property_port="${document.process.port}" property_protocol="${document.process.protocol}" property_responseTimeout="120000" property_basePath="${document.process.basepath}"/>
 	<customer-p-api:config name="Customer_p_api_Config" doc:name="Customer-p-api Config" doc:id="9e3ef514-774d-4331-b159-dd56b31c00e1" property_host="${customer.process.host}" property_port="${customer.process.port}" property_protocol="${customer.process.protocol}" property_basePath="${customer.process.basepath}" property_responseTimeout="120000" />

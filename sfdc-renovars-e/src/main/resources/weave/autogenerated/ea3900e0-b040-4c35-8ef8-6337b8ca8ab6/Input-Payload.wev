@@ -1,0 +1,43 @@
+%dw 2.0
+
+type auto_ea3900e0_b040_4c35_8ef8_6337b8ca8ab6_Input_Payload = {
+  contact?: {
+    firstName?: String | Null, 
+    lastName?: String | Null, 
+    phone?: String | Null, 
+    trackingUrl?: String | Null, 
+    source?: Number | Null, 
+    email?: String | Null, 
+    _?: Any
+  }, 
+  extId?: String | Null, 
+  event?: {
+    note?: String | Null, 
+    address?: {
+      country?: String | Null, 
+      formatted_address?: String | Null, 
+      route?: String | Null, 
+      province?: String | Null, 
+      postalCode?: Number | Null, 
+      street_number?: Number | Null, 
+      locality?: String | Null, 
+      region?: String | Null, 
+      radius?: Number | Null, 
+      short_country?: String | Null, 
+      coords?: Array<Number> | Null, 
+      _?: Any
+    }, 
+    start?: String | Null, 
+    end?: String | Null, 
+    user?: String | Null, 
+    _?: Any
+  }, 
+  operator?: {
+    supername?: String | Null, 
+    name?: String | Null, 
+    id?: String | Null, 
+    _?: Any
+  }, 
+  _?: Any
+}
+

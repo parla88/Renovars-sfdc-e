@@ -1,0 +1,30 @@
+%dw 2.0
+
+type auto_03d3e8d3_0709_424b_83d7_2e78f94063b4_Input_Payload = {
+  appointment?: {
+    note?: String | Null, 
+    address?: String | Null, 
+    consultant?: String | Null, 
+    architect?: String | Null, 
+    start?: String | Null, 
+    designer?: String | Null, 
+    _?: Any
+  }, 
+  lead?: {
+    phone?: String | Null, 
+    trackingUrl?: String | Null, 
+    surname?: String | Null, 
+    name?: String | Null, 
+    source?: String | Null, 
+    email?: String | Null, 
+    _?: Any
+  }, 
+  operator?: {
+    supername?: String | Null, 
+    name?: String | Null, 
+    id?: String | Null, 
+    _?: Any
+  }, 
+  _?: Any
+}
+

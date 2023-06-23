@@ -405,4 +405,69 @@ output application/json
 }]]]></document-p-api:post-saleleadinspection-request-data>
 		</document-p-api:post-saleleadinspection>
 	</flow>
+	<flow name="postAppointment" doc:id="03d3e8d3-0709-424b-83d7-2e78f94063b4" >
+		<flow-ref doc:name="Flow initVars" doc:id="f29acca3-49e9-4a32-bf72-ba8d9a4672bb" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="c0148f76-4977-4b03-9367-3dbbbcc16174" message='#[vars.timestamp ++ vars.transactionId ++ " postAppointment in experience"]' />
+		<document-p-api:post-appointment doc:name="post appointment" doc:id="71888d58-3136-4bd2-811a-757ea976a2e1" config-ref="Document_p_api_Config" f-name='#["postAppointment"]' client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-appointment-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:post-appointment-request-data>
+		</document-p-api:post-appointment>
+	</flow>
+	<flow name="postPlanimetry" doc:id="5676d5b0-3190-4061-b239-3e6c9bd96231" >
+		<flow-ref doc:name="Flow initVars" doc:id="f5e242fe-83c4-4a15-9d4a-3f98280170e8" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="80082dda-0809-4df1-a592-70aed6a29151" message='#[vars.timestamp ++ vars.transactionId ++ " postPlanimetry in experience"]' />
+		<document-p-api:post-planimetry doc:name="post planimetry" doc:id="09ee99c3-d6d2-4b21-9df3-70679db965f0" config-ref="Document_p_api_Config" f-name='#["postPlanimetry"]' client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-planimetry-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:post-planimetry-request-data>
+		</document-p-api:post-planimetry>
+	</flow>
+	<flow name="postPropertySlot" doc:id="6a5251ef-fdb4-4bd2-add1-b28c2381e84b" >
+		<flow-ref doc:name="Flow initVars" doc:id="edc5b6e3-584f-4442-a522-2b75d1d4846d" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="8b6459ba-6ccd-4202-9e13-4e639bc65e2a" message='#[vars.timestamp ++ vars.transactionId ++ " postPropertySlot in experience"]' />
+		<document-p-api:post-propertyslot doc:name="post propertySlot" doc:id="d437726f-71d9-405a-b43b-b130755f7932" config-ref="Document_p_api_Config" f-name="postPropertySlot" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-propertyslot-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:post-propertyslot-request-data>
+		</document-p-api:post-propertyslot>
+	</flow>
+	<flow name="postPurchaseLeadVisit" doc:id="ea3900e0-b040-4c35-8ef8-6337b8ca8ab6" >
+		<flow-ref doc:name="Flow initVars" doc:id="5532c853-da82-4533-9eba-190c3614ea4f" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="973c5751-7af3-4d39-81f2-4d7282d04c6a" message='#[vars.timestamp ++ vars.transactionId ++ " postPropertySlot in experience"]' />
+		<document-p-api:post-purchaseleadvisit doc:name="post purchaseLeadVisit" doc:id="3679be19-9fe6-4e43-9734-38c28081e4ad" config-ref="Document_p_api_Config" f-name="postPurchaseLeadVisit" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-purchaseleadvisit-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></document-p-api:post-purchaseleadvisit-request-data>
+		</document-p-api:post-purchaseleadvisit>
+	</flow>
+	<flow name="postGetUsers" doc:id="fa35af60-7e89-4f78-81f9-4168544106be" >
+		<flow-ref doc:name="Flow initVars" doc:id="a390c3cd-267d-4812-a49f-2db70971c7a0" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="f3434e9d-64b0-445b-b1f3-1eef3c20ad8f" message='#[vars.timestamp ++ vars.transactionId ++ " postGetUsers in experience"]' />
+		<customer-p-api:post-getusers doc:name="post getUsers" doc:id="42ad5e7b-16cd-46f8-868e-31a37704e9f9" config-ref="Customer_p_api_Config" f-name="postGetUsers" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<customer-p-api:post-getusers-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></customer-p-api:post-getusers-request-data>
+		</customer-p-api:post-getusers>
+	</flow>
 </mule>

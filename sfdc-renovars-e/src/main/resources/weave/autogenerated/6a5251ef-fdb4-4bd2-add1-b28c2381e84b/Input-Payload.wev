@@ -1,0 +1,8 @@
+%dw 2.0
+
+type auto_6a5251ef_fdb4_4bd2_add1_b28c2381e84b_Input_Payload = {
+  agent?: String | Null, 
+  slots?: Array<{    start?: Number | Null,     end?: Number | Null,     day?: Number | Null,     _?: Any  }>, 
+  _?: Any
+}
+
