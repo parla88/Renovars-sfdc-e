@@ -488,4 +488,17 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="d5323659-3cc0-4546-8be4-318485113664" message='#[vars.timestamp ++ vars.transactionId ++ " getEvent in experience"]' />
 		<customer-p-api:getideventwithicaluid doc:name="getIdEventWithICalUId" doc:id="d2498926-11d8-4c52-8659-8aa815807f69" config-ref="Customer_p_api_Config" id="#[attributes.uriParams.'id']" f-name="#['getEventWithICalUId']" i-cal-u-id="#[output application/java&#10;---&#10;attributes.queryParams.iCalUId]" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
 	</flow>
+	<flow name="postDisputeFimmFr" doc:id="a6a7a566-bd3c-4f59-b43e-6542a57e1c97" >
+		<flow-ref doc:name="Flow Reference" doc:id="79c091f5-9821-4af1-87a3-d069ba7bc87e" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="736906d5-0e2e-4c8c-a22a-e76e469a0aa7" message='#[vars.timestamp ++ vars.transactionId ++ "postDisputeFIMM/FR in experience"]' />
+		<document-p-api:post-dispute-fimmfr doc:name="post dispute Fimm/Fr" doc:id="ce4849ad-1c51-4e1f-9035-fae21594d981" config-ref="Document_p_api_Config" f-name="postDisputeFIMM/FR" client-id="${secure::document.process.clientid}" client-secret="${secure::document.process.clientsecret}">
+			<document-p-api:post-dispute-fimmfr-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload.request
+}]]]></document-p-api:post-dispute-fimmfr-request-data>
+		</document-p-api:post-dispute-fimmfr>
+	</flow>
 </mule>

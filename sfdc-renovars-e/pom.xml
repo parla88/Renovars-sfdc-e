@@ -70,14 +70,14 @@
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
 			<artifactId>sfdc-renovars-e-api</artifactId>
-			<version>1.0.53</version>
+			<version>1.0.59</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>9b82ee49-beb3-47b7-a619-0e05153193f5</groupId>
 			<artifactId>mule-plugin-document-p-api</artifactId>
-			<version>1.0.43</version>
+			<version>1.0.50</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
