@@ -301,7 +301,7 @@ http://www.mulesoft.org/schema/mule/customer-p-api http://www.mulesoft.org/schem
 	<flow name="getUsers" doc:id="7bbc5e22-cd84-4b75-841e-5687eb6f8c3c" >
 		<flow-ref doc:name="Flow Reference" doc:id="78fea889-c02b-46c5-bbf9-84d5618143e6" name="initVars" />
 		<logger level="INFO" doc:name="Logger" doc:id="102b8cfc-c6ce-4bfe-a115-9985385257f2" message='#[vars.timestamp ++ vars.transactionId ++ " getUser in experience"]' />
-		<customer-p-api:get-users doc:name="Get users" doc:id="f3036981-2029-499b-b3bf-2359d7041584" config-ref="Customer_p_api_Config" f-name="#['getUser']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}"/>
+		<customer-p-api:get-users doc:name="Get users" doc:id="f3036981-2029-499b-b3bf-2359d7041584" config-ref="Customer_p_api_Config" f-name="#['getUser']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}" first-letter-email="#[attributes.queryParams.'firstLetterEmail']"/>
 	</flow>
 	<flow name="GetEvent" doc:id="291bd512-86d7-433a-af86-05fcf84b6b2a" >
 		<flow-ref doc:name="Flow Reference" doc:id="644ffec6-c81d-48b5-b8fb-927f78f3bf64" name="initVars" />
@@ -500,5 +500,62 @@ output application/json
 	request: payload.request
 }]]]></document-p-api:post-dispute-fimmfr-request-data>
 		</document-p-api:post-dispute-fimmfr>
+	</flow>
+	<flow name="getUsersByMail" doc:id="3dc45fe7-28b9-4b66-839f-31290635d08c" >
+		<flow-ref doc:name="Flow Reference" doc:id="f97d8c52-5200-4f2a-a694-c89edc948eb1" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="fa8d397c-410c-426f-9f72-fa999d900ec2" message='#[vars.timestamp ++ vars.transactionId ++ " getUser in experience"]' />
+		<customer-p-api:get-users-by-emails doc:name="Get users by emails" doc:id="3439eedc-fb49-46d4-911c-4bbcecef3e35" config-ref="Customer_p_api_Config" f-name="#['getUserByEmail']" client-id="${secure::customer.process.clientid}" client-secret="${secure::customer.process.clientsecret}" mail="#[attributes.queryParams.'mail']"/>
+	</flow>
+	<flow name="postSevenHubQuotes" doc:id="32a59250-4e6b-42c9-a2f7-ad4e4e171203" >
+		<flow-ref doc:name="Flow Reference" doc:id="d701d222-5f05-438b-a9a5-2f5377311068" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="5a1ac51b-3c8c-4318-ac73-145b8e42974a" message='#[vars.timestamp ++ vars.transactionId ++ " postSevenHubQuotes in experience"]' />
+		<product-p-api:post-sevenhubquotes doc:name="post sevenHubQuotes" doc:id="aebf5dc2-a7fc-4bc1-bfe5-5e6ff6b69503" config-ref="Product_p_api_Config" f-name="postSevenHubQuotes" client-id="${secure::product.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<product-p-api:post-sevenhubquotes-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></product-p-api:post-sevenhubquotes-request-data>
+		</product-p-api:post-sevenhubquotes>
+	</flow>
+	<flow name="postSevenHubAmortizationPlan" doc:id="dea1fc1a-4fa4-4092-b6bf-fd279b3a78bd" >
+		<flow-ref doc:name="Flow Reference" doc:id="9c757b67-4793-481e-b862-8b06ffb3347c" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="340406e4-fa70-4079-a8ed-bcc84900c28e" message='#[vars.timestamp ++ vars.transactionId ++ " postSevenHubAmortizationPlan in experience"]' />
+		<product-p-api:post-sevenhubamortizationplan doc:name="post sevenHubAmortizationPlan" doc:id="a926651c-26d4-4475-bd32-6028599508ab" config-ref="Product_p_api_Config" f-name="postSevenHubAmortizationPlan" client-id="${secure::product.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<product-p-api:post-sevenhubamortizationplan-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></product-p-api:post-sevenhubamortizationplan-request-data>
+		</product-p-api:post-sevenhubamortizationplan>
+	</flow>
+	<flow name="postSevenHubPdf" doc:id="7000cc36-0dae-4d37-b627-6db97828ead9" >
+		<flow-ref doc:name="Flow Reference" doc:id="d81d9afc-2e8f-41ce-9e66-ac1fbfe816f6" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="9ffc30c8-ac28-4164-ac25-f4e75fd71077" message='#[vars.timestamp ++ vars.transactionId ++ " postSevenHubPdf in experience"]' />
+		<product-p-api:post-sevenhubpdf doc:name="post sevenHubPdf" doc:id="d140b96a-5003-4266-8244-a24f44165443" config-ref="Product_p_api_Config" f-name="postSevenHubPdf" client-id="${secure::product.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<product-p-api:post-sevenhubpdf-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></product-p-api:post-sevenhubpdf-request-data>
+		</product-p-api:post-sevenhubpdf>
+	</flow>
+	<flow name="postSevenHubPreventiviIdMortage" doc:id="94ec9321-909b-4f78-8eb8-435110ca30f7" >
+		<flow-ref doc:name="Flow Reference" doc:id="020d13b4-dc7c-4a87-a3d3-ed486f9c5af0" name="initVars" />
+		<logger level="INFO" doc:name="Logger" doc:id="881aefc9-863e-4f0f-9586-fb7b594ef07c" message='#[vars.timestamp ++ vars.transactionId ++ " postSevenHubPreventiviIdMortage in experience"]' />
+		<product-p-api:post-sevenhubquotesbulk doc:name="post sevenHubQuotesBulk" doc:id="c6773235-c3ec-4d73-83f1-4182d4656613" config-ref="Product_p_api_Config" f-name="postSevenHubPreventiviIdMortage" client-id="${secure::product.process.clientid}" client-secret="${secure::customer.process.clientsecret}">
+			<product-p-api:post-sevenhubquotesbulk-request-data ><![CDATA[#[output application/json
+---
+{
+	transactionId: vars.transactionId,
+	timestamp: vars.timestamp as String,
+	request: payload
+}]]]></product-p-api:post-sevenhubquotesbulk-request-data>
+		</product-p-api:post-sevenhubquotesbulk>
 	</flow>
 </mule>
